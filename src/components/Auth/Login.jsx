@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 
-const Login = () => {
+const Login = ({ handleLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const submitHandler = (e) => {
     e.preventDefault();
+    handleLogin(email, password);
+    console.log({ email, password });
     setEmail("");
     setPassword("");
   };
@@ -41,7 +43,6 @@ const Login = () => {
             placeholder="Enter Password"
             required
           />
-          <div>show</div>
           <button className="text-white outline-none mt-7 border-none bg-emerald-500 hover:bg-emerald-700 py-3 px-5 rounded-full w-52 text-lg">
             Log In
           </button>
