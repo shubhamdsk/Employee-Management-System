@@ -11,10 +11,10 @@ const CreateTask = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
+    // Ensure the task data is saved to state
     setTask({
       taskTitle,
       taskDate,
-      assignTo,
       taskDescription,
       category,
       active: false,
@@ -23,17 +23,18 @@ const CreateTask = () => {
       completed: false,
     });
 
+    // Check if "employees" exists in localStorage and parse it
+    const data = JSON.parse(localStorage.getItem("employees"));
+    console.log(data);
+
+    // Reset form fields
     setTaskTitle("");
     setAssignTo("");
     setCategory("");
     setTaskDate("");
     setTaskDescription("");
   };
-  useEffect(() => {
-    if (task.newTask) {
-      console.log(task);
-    }
-  }, [task]);
+
   return (
     <div className="p-2 bg-[#1c1c1c] mt-2 rounded">
       <form
