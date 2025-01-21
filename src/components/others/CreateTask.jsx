@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthProvider";
 
 const CreateTask = () => {
   const [taskTitle, setTaskTitle] = useState("");
@@ -6,26 +7,36 @@ const CreateTask = () => {
   const [assignTo, setAssignTo] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [category, setCategory] = useState("");
-  const [task, setTask] = useState({});
+  const [newTasks, setNewTasks] = useState({});
+
+  const [userData, setUserData] = useContext(AuthContext);
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    // Ensure the task data is saved to state
-    setTask({
+    const dataToset = {
       taskTitle,
       taskDate,
       taskDescription,
       category,
       active: false,
-      newTask: true,
-      failed: true,
-      completed: false,
-    });
+      newTask: false,
+      failed: false,
+      completed: true,
+    };
+    // Ensure the task data is saved to state
+    setNewTasks(dataToset);
 
-    // Check if "employees" exists in localStorage and parse it
-    const data = JSON.parse(localStorage.getItem("employees"));
-    console.log(data);
+    setUserData((prevState) => {
+      const result = prevState?.map((item) => {
+        if (item?.firstName == assignTo) {
+          return { ...item, tasks: [...item.tasks, dataToset] };
+        } else {
+          return item;
+        }
+      });
+      return result;
+    });
 
     // Reset form fields
     setTaskTitle("");
