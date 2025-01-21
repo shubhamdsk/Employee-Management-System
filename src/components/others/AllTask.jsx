@@ -4,7 +4,7 @@ import { AuthContext } from "../../context/AuthProvider";
 const AllTask = () => {
   const [userData] = useContext(AuthContext);
   return (
-    <div className="bg-[#1c1c1c] p-2 rounded mt-2 h-44 overflow-auto ">
+    <div className="bg-[#1c1c1c] p-2 rounded mt-2 h-72 overflow-auto ">
       <div className="bg-red-500 mb-2 px-4 py-2 rounded flex justify-between items-center ">
         <h2 className="text-lg font-medium w-1/5">Employee Name</h2>
         <h5 className="text-lg font-medium w-1/5">New Task</h5>
